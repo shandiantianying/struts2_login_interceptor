@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE struts PUBLIC  
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"  
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="all" extends="struts-default">
+		<interceptors>
+			<interceptor name="LoginInterceptor"
+				class="cn.shandian.interceptor.LoginInterceptor">
+			</interceptor>
+			<interceptor-stack name="LoginStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<action name="Login" class="cn.shandian.action.LoginAction"
+			method="execute">
+			<result>welcome.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+
+		<action name="Update" class="cn.shandian.action.UpdateAction"
+			method="execute">
+			<interceptor-ref name="LoginStack"></interceptor-ref>
+			<result>welcome.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+	</package>
+
+</struts>
